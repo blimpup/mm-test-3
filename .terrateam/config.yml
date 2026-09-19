@@ -1,4 +1,11 @@
+
 engine:
   name: tofu
-when_modified:
-  autoplan: false
+indexer:
+  enabled: true
+
+dirs:
+  '**/*.tf':
+    when_modified:
+      file_patterns:
+        - '${DIR}/**/*'
