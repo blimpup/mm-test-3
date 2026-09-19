@@ -1,5 +1,3 @@
-resource "null_resource" "foo" {
-}
-
-resource "null_resource" "bar" {
+module "foo" {
+  source = "../modules/foo"
 }
