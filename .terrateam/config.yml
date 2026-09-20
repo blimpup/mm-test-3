@@ -1,14 +1,13 @@
 apply_requirements:
+  create_pending_apply_check: false
   checks:
-  - approved:
-      all_of:
-      - user:terrateam-test-user02
-      enabled: true
-    tag_query: dir:tf1
-  - approved:
-      all_of:
-      - user:terrateam-test-user01
-      enabled: true
-    tag_query: dir:tf2
+    - tag_query: ''
+      approved:
+        enabled: true
+        any_of_count: 1000
+
 engine:
   name: tofu
+
+when_modified:
+  autoapply: true
