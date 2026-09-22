@@ -1,13 +1,2 @@
-dirs:
-  svc:
-    when_modified:
-      depends_on: "outputs:cfg"
 engine:
-  name: custom
-  init: ['echo', 'init']
-  plan: ['touch', '$TERRATEAM_PLAN_FILE']
-  diff: ['printf', '+ change\n']
-  apply: ['echo', 'apply']
-
-when_modified:
-  file_patterns: ['${DIR}/*']
+  name: tofu
