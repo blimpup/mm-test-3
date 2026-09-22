@@ -1,3 +1,7 @@
+dirs:
+  svc:
+    when_modified:
+      depends_on: "outputs:cfg"
 engine:
   name: custom
   init: ['echo', 'init']
