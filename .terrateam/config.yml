@@ -1,18 +1,19 @@
-# A plan and an apply join the run of the steps before them.  The default,
-# setup, permits the tree builder, the config builder and the indexer only.
-batch_runs:
-  merge_steps: all
-
+# An open pull request with the tree builder on, whose apply is held open by a hook, so that the
+# test can push to the feature branch while the apply runs (RFD 2356).  The same tree builder is on
+# every branch, so a file that did not change keeps its id.
 tree_builder:
   enabled: true
-  script: '${TERRATEAM_ROOT}/bin/generate build-tree'
+  script: |
+    #! /usr/bin/env bash
+    $TERRATEAM_ROOT/bin/tree-builder
 
-config_builder:
-  enabled: true
-  script: '${TERRATEAM_ROOT}/bin/generate build-config'
+engine:
+  name: tofu
 
 hooks:
-  all:
+  apply:
     pre:
-      - type: run
-        cmd: ['${TERRATEAM_ROOT}/bin/generate', 'build']
+    - cmd:
+      - 'sleep'
+      - '60'
+      type: run
