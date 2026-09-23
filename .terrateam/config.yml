@@ -1,11 +1,26 @@
-config_builder:
-  enabled: true
-  script: |
-    #! /usr/bin/env bash
-    echo '{"indexer": {"enabled": true}}'
+# The apply is started by the merge and held open by a hook, so that the test can move
+# the destination branch while it runs.  A resource of tf/ then fails to apply (RFD 2356).  See 0001
+# for why each key is here.
+
+apply_requirements:
+  checks:
+    - tag_query: ''
+      apply_after_merge:
+        enabled: true
+
+cost_estimation:
+  enabled: false
 
 engine:
   name: tofu
 
 when_modified:
-  autoplan: false
+  autoapply: true
+
+hooks:
+  apply:
+    pre:
+    - cmd:
+      - 'sleep'
+      - '60'
+      type: run
