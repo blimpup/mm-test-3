@@ -1,7 +1,6 @@
-destination_branches:
-  - branch: main
-  - branch: 'test/*'
-    source_branches: ['test/*']
+automerge:
+  enabled: true
+  merge_strategy: squash
 
 engine:
   name: tofu
