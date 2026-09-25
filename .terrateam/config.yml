@@ -1,6 +1,6 @@
-automerge:
-  enabled: true
-  merge_strategy: squash
-
+drift:
+  enabled: false
+  reconcile: true
+  schedule: hourly
 engine:
   name: tofu
