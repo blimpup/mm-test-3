@@ -1,2 +1,2 @@
-resource "null_resource" "from_default" {
+resource "null_resource" "from_feature2" {
 }
