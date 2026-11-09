@@ -1,2 +1,18 @@
 engine:
   name: tofu
+# The [run] step that sleeps is what keeps the autoplan plan of [base] running while the test
+# pushes a file no dirspace uses and asks for a noop plan on the head the push made, which is
+# the point of this test.  The sleep is longer than 0002's because this test pushes, opens a
+# second pull-request head, and runs two plan commands while the plan of [base] is in flight.
+# The [init] and [plan] steps after it must be in the list: a [plan] list with no [plan] step
+# makes the whole repo config invalid, and then the test gets a config error instead of the
+# plan it waits for.
+workflows:
+- plan:
+  - cmd:
+    - sleep
+    - '90'
+    type: run
+  - type: init
+  - type: plan
+  tag_query: dir:base
