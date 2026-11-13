@@ -1,2 +1,13 @@
+dirs:
+  database:
+    when_modified:
+      depends_on: dir:base
 engine:
   name: tofu
+parameters:
+  names:
+    mode:
+      values:
+      - DEBUG
+      - RELEASE
+      fail_if_set: true
