@@ -1,2 +1,18 @@
+# An open pull request whose apply is held open long enough to push twice to its branch, so that a
+# commit whose tree is built sits between the commit the apply runs on and its head (RFD 2356).
+tree_builder:
+  enabled: true
+  script: |
+    #! /usr/bin/env bash
+    $TERRATEAM_ROOT/bin/tree-builder
+
 engine:
   name: tofu
+
+hooks:
+  apply:
+    pre:
+    - cmd:
+      - 'sleep'
+      - '120'
+      type: run
