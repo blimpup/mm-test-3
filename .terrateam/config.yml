@@ -1,9 +1,10 @@
-# An open pull request whose apply is held open long enough to push twice to its branch, so that a
-# commit whose tree is built sits between the commit the apply runs on and its head (RFD 2356).
+# The head of the second push.  Its tree builder waits longer than the apply runs, thus the server has
+# no tree of this commit when the result of the apply arrives (RFD 2356, Fail safe).
 tree_builder:
   enabled: true
   script: |
     #! /usr/bin/env bash
+    sleep 300
     $TERRATEAM_ROOT/bin/tree-builder
 
 engine:
